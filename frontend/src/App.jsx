@@ -4,16 +4,32 @@ import {
   Route,
 } from 'react-router-dom'
 
+import {
+  lazy,
+  Suspense,
+} from 'react'
+
 import { Toaster } from 'react-hot-toast'
 
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Dashboard from './pages/Dashboard'
-import Expenses from './pages/Expenses'
-import Income from './pages/Income'
-import Analytics from './pages/Analytics'
-import Profile from './pages/Profile'
+const Dashboard = lazy(() =>
+  import('./pages/Dashboard')
+)
+
+const Expenses = lazy(() =>
+  import('./pages/Expenses')
+)
+
+const Income = lazy(() =>
+  import('./pages/Income')
+)
+
+const Analytics = lazy(() =>
+  import('./pages/Analytics')
+)
+
+const Profile = lazy(() =>
+  import('./pages/Profile')
+)
 
 import ProtectedRoute from './routes/ProtectedRoute'
 
@@ -22,7 +38,13 @@ function App() {
     <BrowserRouter>
 
       <Toaster position="top-right" />
-
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center bg-[#020617] text-white text-3xl font-bold">
+            Loading...
+          </div>
+        }
+      >
       <Routes>
 
         <Route
@@ -86,7 +108,7 @@ function App() {
         />
 
       </Routes>
-
+      </Suspense>
     </BrowserRouter>
   )
 }
