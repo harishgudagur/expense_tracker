@@ -11,15 +11,21 @@ import {
 
 import { Toaster } from 'react-hot-toast'
 
+import ProtectedRoute from './routes/ProtectedRoute'
+
+// LAZY IMPORTS
 const Home = lazy(() =>
   import('./pages/Home')
 )
+
 const Login = lazy(() =>
   import('./pages/Login')
 )
+
 const Register = lazy(() =>
   import('./pages/Register')
 )
+
 const Dashboard = lazy(() =>
   import('./pages/Dashboard')
 )
@@ -40,84 +46,132 @@ const Profile = lazy(() =>
   import('./pages/Profile')
 )
 
-import ProtectedRoute from './routes/ProtectedRoute'
+const ForgotPassword =
+  lazy(() =>
+    import(
+      './pages/ForgotPassword'
+    )
+  )
+
+const ResetPassword =
+  lazy(() =>
+    import(
+      './pages/ResetPassword'
+    )
+  )
 
 function App() {
   return (
     <BrowserRouter>
 
       <Toaster position="top-right" />
+
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center bg-[#020617] text-white text-3xl font-bold">
+
             Loading...
+
           </div>
         }
       >
-      <Routes>
 
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <Routes>
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+          {/* PUBLIC */}
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
 
-        <Route
-          path="/expenses"
-          element={
-            <ProtectedRoute>
-              <Expenses />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/register"
+            element={
+              <Register />
+            }
+          />
 
-        <Route
-          path="/income"
-          element={
-            <ProtectedRoute>
-              <Income />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/forgot-password"
+            element={
+              <ForgotPassword />
+            }
+          />
 
-        <Route
-          path="/analytics"
-          element={
-            <ProtectedRoute>
-              <Analytics />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/reset-password/:token"
+            element={
+              <ResetPassword />
+            }
+          />
 
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+          {/* PROTECTED */}
 
-      </Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+
+                <Dashboard />
+
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/expenses"
+            element={
+              <ProtectedRoute>
+
+                <Expenses />
+
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/income"
+            element={
+              <ProtectedRoute>
+
+                <Income />
+
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute>
+
+                <Analytics />
+
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+
+                <Profile />
+
+              </ProtectedRoute>
+            }
+          />
+
+        </Routes>
+
       </Suspense>
+
     </BrowserRouter>
   )
 }

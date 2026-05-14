@@ -1,3 +1,8 @@
+import crypto from 'crypto'
+
+import bcrypt from 'bcryptjs'
+
+import sendEmail from '../utils/sendEmail.js'
 const bcrypt = require('bcryptjs')
 const User = require('../models/User')
 const generateToken = require('../utils/generateToken')

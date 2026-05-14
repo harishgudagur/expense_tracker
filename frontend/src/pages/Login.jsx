@@ -199,7 +199,18 @@ function Login() {
               : 'Login'}
 
           </button>
+          <p className="text-center mt-5">
 
+  <a
+    href="/forgot-password"
+    className="text-cyan-400 hover:underline"
+  >
+
+    Forgot Password?
+
+  </a>
+
+</p>
         </div>
 
       </motion.form>
