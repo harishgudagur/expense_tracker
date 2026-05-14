@@ -1,46 +1,70 @@
-const express = require('express')
-const dotenv = require('dotenv')
-const cors = require('cors')
-const morgan = require('morgan')
+import express from 'express'
 
-const connectDB = require('./config/db')
+import dotenv from 'dotenv'
 
+import cors from 'cors'
+
+import connectDB from './config/db.js'
+
+import authRoutes from './routes/authRoutes.js'
+
+import expenseRoutes from './routes/expenseRoutes.js'
+
+import incomeRoutes from './routes/incomeRoutes.js'
+
+// CONFIG
 dotenv.config()
 
+// CONNECT DATABASE
 connectDB()
 
 const app = express()
 
+// MIDDLEWARE
+app.use(express.json())
+
+// CORS
 app.use(
   cors({
     origin: [
       'http://localhost:5173',
+
       'https://expense-tracker-beta-teal.vercel.app',
     ],
+
     credentials: true,
   })
 )
 
-app.use(express.json())
-
-app.use(morgan('dev'))
-
+// TEST ROUTE
 app.get('/', (req, res) => {
-  res.send('ExpenseFlow API Running')
+  res.send(
+    'Expense Tracker API Running'
+  )
 })
 
-app.use('/api/auth', require('./routes/authRoutes'))
-app.use('/api/expenses', require('./routes/expenseRoutes'))
+// ROUTES
 app.use(
-  '/api/income',
-  require('./routes/incomeRoutes')
+  '/api/auth',
+  authRoutes
 )
+
 app.use(
   '/api/expenses',
-  require('./routes/expenseRoutes')
+  expenseRoutes
 )
-const PORT = process.env.PORT || 5000
+
+app.use(
+  '/api/income',
+  incomeRoutes
+)
+
+// PORT
+const PORT =
+  process.env.PORT || 5000
 
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`)
+  console.log(
+    `Server running on ${PORT}`
+  )
 })
