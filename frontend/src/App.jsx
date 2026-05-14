@@ -1,5 +1,4 @@
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom'
@@ -46,40 +45,23 @@ const Profile = lazy(() =>
   import('./pages/Profile')
 )
 
-const ForgotPassword =
-  lazy(() =>
-    import(
-      './pages/ForgotPassword'
-    )
-  )
-
-const ResetPassword =
-  lazy(() =>
-    import(
-      './pages/ResetPassword'
-    )
-  )
-
 function App() {
   return (
-    <BrowserRouter>
+    <>
 
       <Toaster position="top-right" />
 
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center bg-[#020617] text-white text-3xl font-bold">
-
             Loading...
-
           </div>
         }
       >
 
         <Routes>
 
-          {/* PUBLIC */}
-
+          {/* PUBLIC ROUTES */}
           <Route
             path="/"
             element={<Home />}
@@ -92,34 +74,15 @@ function App() {
 
           <Route
             path="/register"
-            element={
-              <Register />
-            }
+            element={<Register />}
           />
 
-          <Route
-            path="/forgot-password"
-            element={
-              <ForgotPassword />
-            }
-          />
-
-          <Route
-            path="/reset-password/:token"
-            element={
-              <ResetPassword />
-            }
-          />
-
-          {/* PROTECTED */}
-
+          {/* PROTECTED ROUTES */}
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-
                 <Dashboard />
-
               </ProtectedRoute>
             }
           />
@@ -128,9 +91,7 @@ function App() {
             path="/expenses"
             element={
               <ProtectedRoute>
-
                 <Expenses />
-
               </ProtectedRoute>
             }
           />
@@ -139,9 +100,7 @@ function App() {
             path="/income"
             element={
               <ProtectedRoute>
-
                 <Income />
-
               </ProtectedRoute>
             }
           />
@@ -150,9 +109,7 @@ function App() {
             path="/analytics"
             element={
               <ProtectedRoute>
-
                 <Analytics />
-
               </ProtectedRoute>
             }
           />
@@ -161,9 +118,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute>
-
                 <Profile />
-
               </ProtectedRoute>
             }
           />
@@ -172,7 +127,7 @@ function App() {
 
       </Suspense>
 
-    </BrowserRouter>
+    </>
   )
 }
 
