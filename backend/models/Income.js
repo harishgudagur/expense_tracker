@@ -1,11 +1,12 @@
 import mongoose from 'mongoose'
 
 const incomeSchema =
-  new mongoose.Schema(
+  mongoose.Schema(
     {
       user: {
         type:
-          mongoose.Schema.Types.ObjectId,
+          mongoose.Schema.Types
+            .ObjectId,
         ref: 'User',
         required: true,
       },
@@ -25,9 +26,7 @@ const incomeSchema =
     }
   )
 
-const Income = mongoose.model(
+export default mongoose.model(
   'Income',
   incomeSchema
 )
-
-export default Income

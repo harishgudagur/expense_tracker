@@ -15,7 +15,8 @@ function DashboardHeader({
   const [search, setSearch] =
     useState('')
 
-  const [showNotifications,
+  const [
+    showNotifications,
     setShowNotifications,
   ] = useState(false)
 
@@ -52,17 +53,22 @@ function DashboardHeader({
     setSearch(value)
 
     const filtered =
-      expenses.filter(item =>
-        item.title
-          ?.toLowerCase()
-          .includes(
-            value.toLowerCase()
-          )
+      (expenses || []).filter(
+        item =>
+          item.title
+            ?.toLowerCase()
+            .includes(
+              value.toLowerCase()
+            )
       )
 
-    setFilteredExpenses(
-      filtered
-    )
+    if (
+      setFilteredExpenses
+    ) {
+      setFilteredExpenses(
+        filtered
+      )
+    }
   }
 
   // GREETING

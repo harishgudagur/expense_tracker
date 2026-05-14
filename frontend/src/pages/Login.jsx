@@ -76,10 +76,7 @@ function Login() {
       )
 
       // LOGIN CONTEXT
-      login({
-        ...data.user,
-        token: data.token,
-      })
+      login(data)
 
       toast.success(
         `Welcome ${data.user.name}`
@@ -202,18 +199,21 @@ function Login() {
               : 'Login'}
 
           </button>
+
+          {/* FORGOT PASSWORD */}
           <p className="text-center mt-5">
 
-  <a
-    href="/forgot-password"
-    className="text-cyan-400 hover:underline"
-  >
+            <a
+              href="/forgot-password"
+              className="text-cyan-400 hover:underline"
+            >
 
-    Forgot Password?
+              Forgot Password?
 
-  </a>
+            </a>
 
-</p>
+          </p>
+
         </div>
 
       </motion.form>

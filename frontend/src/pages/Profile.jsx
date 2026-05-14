@@ -101,6 +101,9 @@ function Profile() {
     )
 
     setEditing(false)
+
+    // REFRESH UI
+    window.location.reload()
   }
 
   return (
