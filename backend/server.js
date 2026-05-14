@@ -13,8 +13,8 @@ const app = express()
 
 app.use(
   cors({
-    origin:
-      'expense-tracker-beta-teal.vercel.app',
+    origin: 
+      'https://expense-tracker-beta-teal.vercel.app',
     credentials: true,
   })
 )
