@@ -11,6 +11,15 @@ import {
 
 import { Toaster } from 'react-hot-toast'
 
+const Home = lazy(() =>
+  import('./pages/Home')
+)
+const Login = lazy(() =>
+  import('./pages/Login')
+)
+const Register = lazy(() =>
+  import('./pages/Register')
+)
 const Dashboard = lazy(() =>
   import('./pages/Dashboard')
 )
