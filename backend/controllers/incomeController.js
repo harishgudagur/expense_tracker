@@ -1,63 +1,51 @@
-const Income = require('../models/Income')
+import Income from '../models/Income.js'
 
-const getIncome = async (req, res) => {
-  try {
-    const income = await Income.find({
-      user: req.user._id,
-    })
+// ADD INCOME
+export const addIncome =
+  async (req, res) => {
+    try {
+      const { source, amount } =
+        req.body
 
-    res.json(income)
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    })
-  }
-}
+      if (!source || !amount) {
+        return res.status(400).json({
+          message:
+            'Please fill all fields',
+        })
+      }
 
-const addIncome = async (req, res) => {
-  try {
-    const { source, amount } = req.body
+      const income =
+        await Income.create({
+          user: req.user._id,
+          source,
+          amount,
+        })
 
-    const income = await Income.create({
-      user: req.user._id,
-      source,
-      amount,
-    })
-
-    res.status(201).json(income)
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    })
-  }
-}
-
-const deleteIncome = async (req, res) => {
-  try {
-    const income = await Income.findById(
-      req.params.id
-    )
-
-    if (!income) {
-      return res.status(404).json({
-        message: 'Income not found',
+      res.status(201).json(
+        income
+      )
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
       })
     }
-
-    await income.deleteOne()
-
-    res.json({
-      message: 'Income deleted',
-    })
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    })
   }
-}
 
-module.exports = {
-  getIncome,
-  addIncome,
-  deleteIncome,
-}
+// GET ALL INCOME
+export const getIncome =
+  async (req, res) => {
+    try {
+      const income =
+        await Income.find({
+          user: req.user._id,
+        }).sort({
+          createdAt: -1,
+        })
+
+      res.json(income)
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      })
+    }
+  }

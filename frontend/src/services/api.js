@@ -5,19 +5,19 @@ const API = axios.create({
     'https://expense-tracker-s74f.onrender.com/api',
 })
 
+// ADD TOKEN AUTOMATICALLY
 API.interceptors.request.use(
-  config => {
-    const token =
-      localStorage.getItem(
-        'token'
-      )
+  req => {
+    const user = JSON.parse(
+      localStorage.getItem('user')
+    )
 
-    if (token) {
-      config.headers.Authorization =
-        `Bearer ${token}`
+    if (user?.token) {
+      req.headers.Authorization =
+        `Bearer ${user.token}`
     }
 
-    return config
+    return req
   }
 )
 

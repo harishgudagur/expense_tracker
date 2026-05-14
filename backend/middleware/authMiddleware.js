@@ -1,8 +1,12 @@
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 
-const User = require('../models/User')
+import User from '../models/User.js'
 
-const protect = async (req, res, next) => {
+const protect = async (
+  req,
+  res,
+  next
+) => {
   let token
 
   if (
@@ -22,27 +26,26 @@ const protect = async (req, res, next) => {
         process.env.JWT_SECRET
       )
 
-      req.user = await User.findById(
-        decoded.id
-      ).select('-password')
+      req.user =
+        await User.findById(
+          decoded.id
+        ).select('-password')
 
       next()
     } catch (error) {
-      res.status(401)
-
-      throw new Error(
-        'Not authorized'
-      )
+      return res.status(401).json({
+        message:
+          'Not authorized',
+      })
     }
   }
 
   if (!token) {
-    res.status(401)
-
-    throw new Error(
-      'No token provided'
-    )
+    return res.status(401).json({
+      message:
+        'No token provided',
+    })
   }
 }
 
-module.exports = protect
+export default protect
