@@ -44,7 +44,10 @@ function Register() {
           formData
         )
 
-      login(data)
+      login({
+        ...data.user,
+        token: data.token,
+      })
 
       toast.success(
         'Registration successful'

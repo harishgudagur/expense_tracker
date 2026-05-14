@@ -76,7 +76,10 @@ function Login() {
       )
 
       // LOGIN CONTEXT
-      login(data)
+      login({
+        ...data.user,
+        token: data.token,
+      })
 
       toast.success(
         `Welcome ${data.user.name}`

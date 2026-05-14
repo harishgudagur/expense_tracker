@@ -1,19 +1,24 @@
 import axios from 'axios'
 
 const API = axios.create({
-  baseURL: 'https://expense-tracker-s74f.onrender.com/api',
+  baseURL:
+    'https://expense-tracker-s74f.onrender.com/api',
 })
 
-API.interceptors.request.use(req => {
-  const user = JSON.parse(
-    localStorage.getItem('user')
-  )
+API.interceptors.request.use(
+  config => {
+    const token =
+      localStorage.getItem(
+        'token'
+      )
 
-  if (user?.token) {
-    req.headers.Authorization = `Bearer ${user.token}`
+    if (token) {
+      config.headers.Authorization =
+        `Bearer ${token}`
+    }
+
+    return config
   }
-
-  return req
-})
+)
 
 export default API
