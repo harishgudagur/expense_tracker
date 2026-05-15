@@ -20,7 +20,7 @@ function ExpenseTable({
       )
 
       fetchExpenses()
-    } catch (error) {
+    } catch (_error) {
       toast.error(
         'Delete failed'
       )

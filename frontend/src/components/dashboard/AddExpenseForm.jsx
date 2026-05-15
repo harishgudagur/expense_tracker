@@ -32,7 +32,7 @@ function AddExpenseForm({ fetchExpenses }) {
       })
 
       fetchExpenses()
-    } catch (error) {
+    } catch (_error) {
       toast.error('Failed to add expense')
     }
   }

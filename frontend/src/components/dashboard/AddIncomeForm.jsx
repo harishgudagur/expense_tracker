@@ -40,7 +40,7 @@ function AddIncomeForm({
       })
 
       fetchIncome()
-    } catch (error) {
+    } catch (_error) {
       toast.error(
         'Failed to add income'
       )

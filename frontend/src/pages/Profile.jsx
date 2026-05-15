@@ -33,11 +33,6 @@ function Profile() {
     )
 
   // FETCH DATA
-  useEffect(() => {
-    fetchExpenses()
-    fetchIncome()
-  }, [])
-
   const fetchExpenses =
     async () => {
       try {
@@ -65,6 +60,11 @@ function Profile() {
         console.log(error)
       }
     }
+
+  useEffect(() => {
+    fetchExpenses()
+    fetchIncome()
+  }, [])
 
   // TOTALS
   const totalExpenses =

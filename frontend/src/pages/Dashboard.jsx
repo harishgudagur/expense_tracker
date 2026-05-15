@@ -30,20 +30,6 @@ function Dashboard() {
 
   const [search, setSearch] = useState('')
 
-  const filteredExpenses =
-    expenses.filter(item =>
-      item.title
-        .toLowerCase()
-        .includes(
-          search.toLowerCase()
-        ) ||
-      item.category
-        .toLowerCase()
-        .includes(
-          search.toLowerCase()
-        )
-    )
-
   const fetchExpenses =
     async () => {
       try {
